@@ -215,7 +215,8 @@ const Index = () => {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Patient Mode</span>
+            <MorseChart variant="compact" />
+            <span className="text-xs text-muted-foreground hidden sm:inline">Patient Mode</span>
             <Switch checked={patientMode} onCheckedChange={setPatientMode} />
           </div>
         </div>
@@ -297,6 +298,7 @@ const Index = () => {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
+            <MorseChart variant="compact" />
             <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card/60 border border-border/50">
               <Eye className="w-4 h-4 text-primary" />
               <span className="text-xs text-muted-foreground">Patient Mode</span>
