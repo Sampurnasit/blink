@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as mpFaceMesh from "@mediapipe/face_mesh";
-import { Camera } from "@mediapipe/camera_utils";
+import * as mpCamera from "@mediapipe/camera_utils";
 
 // Resilient constructor resolution for MediaPipe's non-standard exports
 // @ts-ignore
@@ -8,6 +8,12 @@ const FaceMesh = mpFaceMesh.FaceMesh ||
                  (mpFaceMesh as any).default?.FaceMesh || 
                  (window as any).FaceMesh || 
                  mpFaceMesh;
+
+// @ts-ignore
+const Camera = mpCamera.Camera || 
+               (mpCamera as any).default?.Camera || 
+               (window as any).Camera || 
+               mpCamera;
 
 type Results = any;
 
