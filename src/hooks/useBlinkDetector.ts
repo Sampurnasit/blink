@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { FaceMesh, Results } from "@mediapipe/face_mesh";
+import * as mpFaceMesh from "@mediapipe/face_mesh";
+// @ts-ignore
+const FaceMesh = mpFaceMesh.FaceMesh || mpFaceMesh.default?.FaceMesh || mpFaceMesh;
+type Results = any; 
+// Results might not be exported as a type from the namespace in older versions, 
+// using any to be safe or checking exports if needed. 
+// Actually Results is often a type, not a value.
+
 import { Camera } from "@mediapipe/camera_utils";
 
 // MediaPipe FaceMesh eye landmark indices (6 points each)
