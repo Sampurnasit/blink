@@ -41,14 +41,14 @@ const DEFAULT_CONTACTS = [
 
 function loadContacts() {
   try {
-    const saved = localStorage.getItem("blinkvoice_contacts");
+    const saved = localStorage.getItem("blink_contacts");
     if (saved) return JSON.parse(saved);
   } catch { /* ignore */ }
   return DEFAULT_CONTACTS;
 }
 
 function saveContacts(contacts: typeof DEFAULT_CONTACTS) {
-  localStorage.setItem("blinkvoice_contacts", JSON.stringify(contacts));
+  localStorage.setItem("blink_contacts", JSON.stringify(contacts));
 }
 
 // Free API instances to try in order for custom video search
@@ -80,7 +80,7 @@ const Index = () => {
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [sendMode, setSendMode] = useState<"whatsapp" | "sms">(
-    () => (localStorage.getItem("blinkvoice_sendmode") as "whatsapp" | "sms") || "whatsapp"
+    () => (localStorage.getItem("blink_sendmode") as "whatsapp" | "sms") || "whatsapp"
   );
 
   const CATEGORIES = useMemo(() => [
@@ -171,7 +171,7 @@ const Index = () => {
       speak(`Sending SMS to ${contact.label}`);
       addLog(`SMS → ${contact.label}...`, "orange");
 
-      const smsKey = localStorage.getItem("blinkvoice_sms_key") || "";
+      const smsKey = localStorage.getItem("blink_sms_key") || "";
       if (!smsKey) {
         speak("No SMS API key configured");
         addLog("SMS FAILED: Set Fast2SMS API key in EDIT mode", "red");
@@ -185,7 +185,7 @@ const Index = () => {
         const params = new URLSearchParams({
           authorization: smsKey,
           route: "q",
-          message: `[BlinkVoice] ${message}`,
+          message: `[BLINK] ${message}`,
           numbers: number,
         });
         const res = await fetch(`/api/fast2sms?${params.toString()}`);
@@ -456,7 +456,7 @@ const Index = () => {
         {/* Logo */}
         <div className="flex items-center gap-2 pl-2 tracking-widest text-[#00f0ff] uppercase text-sm mt-1">
           <div className="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse" />
-          <span className="font-bold">BLINKMORSE</span>
+          <span className="font-bold text-lg">BLINK</span>
           <span className="ml-auto text-[9px] text-gray-500">AAC v2</span>
         </div>
 
@@ -755,7 +755,7 @@ const Index = () => {
                 onClick={() => {
                   const next = sendMode === "whatsapp" ? "sms" : "whatsapp";
                   setSendMode(next);
-                  localStorage.setItem("blinkvoice_sendmode", next);
+                  localStorage.setItem("blink_sendmode", next);
                 }}
                 className={`text-[10px] font-bold px-2 py-0.5 rounded transition-colors border ${
                   sendMode === "sms"
@@ -813,8 +813,8 @@ const Index = () => {
                 <span className="text-[10px] text-gray-500 whitespace-nowrap">SMS API Key:</span>
                 <input
                   type="text"
-                  defaultValue={localStorage.getItem("blinkvoice_sms_key") || ""}
-                  onChange={(e) => localStorage.setItem("blinkvoice_sms_key", e.target.value.trim())}
+                  defaultValue={localStorage.getItem("blink_sms_key") || ""}
+                  onChange={(e) => localStorage.setItem("blink_sms_key", e.target.value.trim())}
                   placeholder="Paste your Fast2SMS API key"
                   className="flex-1 bg-[#101524] border border-[#1e293b] rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-blue-400/50 font-mono"
                 />
