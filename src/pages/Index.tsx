@@ -16,6 +16,7 @@ const QUICK_WORDS = [
   { label: "No", emoji: "❌" },
   { label: "Help", emoji: "🆘" },
   { label: "Water", emoji: "💧" },
+  { label: "Oxygen", emoji: "🫁" },
   { label: "Pain", emoji: "😣" },
   { label: "Doctor", emoji: "👨‍⚕️" },
   { label: "Please", emoji: "🙏" },
@@ -24,6 +25,7 @@ const QUICK_WORDS = [
   { label: "I", emoji: "👤" },
   { label: "Food", emoji: "🍽️" },
   { label: "Tired", emoji: "😴" },
+  { label: "Rest", emoji: "😌" },
 ];
 
 const YOUTUBE_LINKS = [
